@@ -15,9 +15,8 @@ const Sidebar = () => {
       {links.map((link) => {
         const { id, text, url } = link;
         return (
-          <Link to={url}>
+          <Link to={url} key={id}>
             <div
-              key={id}
               className="uppercase text-center py-5 border-b border-gray-700 cursor-pointer"
               onClick={sidebarToggle}
             >

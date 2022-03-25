@@ -18,6 +18,7 @@ const FilterBar = () => {
     return () => {
       document.removeEventListener("click", checkHandler);
     };
+    // eslint-disable-next-line
   }, [isFilterbarOpen]);
   return (
     <div
@@ -37,9 +38,12 @@ const FilterBar = () => {
         </div>
         {/* end title */}
         <div className="mt-3">
-          {categories.map((category) => {
+          {categories.map((category, index) => {
             return (
-              <div className="py-2 border-b border-gray-400 capitalize">
+              <div
+                className="py-2 border-b border-gray-400 capitalize"
+                key={index}
+              >
                 {category}
               </div>
             );
