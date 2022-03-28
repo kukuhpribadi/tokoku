@@ -1,12 +1,13 @@
 import React from "react";
 import Hero from "../components/Hero";
-import { FiList, FiShoppingCart, FiEye, FiGrid } from "react-icons/fi";
-import { products } from "../utils/constants";
+import { FiList, FiGrid, FiChevronsLeft } from "react-icons/fi";
 import { useAppContext } from "../context/app_context";
 import SectionFilter from "../components/SectionFilter";
+import GridView from "../components/GridView";
+import ListView from "../components/ListView";
 
 const Shop = () => {
-  const { filterbarToggle } = useAppContext();
+  const { gridView, filterbarToggle, gridViewToggle } = useAppContext();
   return (
     <div>
       <Hero url="https://images.unsplash.com/photo-1595309849731-f7ce86eda9fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1583&q=80" />
@@ -19,7 +20,7 @@ const Shop = () => {
             onClick={filterbarToggle}
           >
             <div className="text-2xl">
-              <FiList />
+              <FiChevronsLeft />
             </div>
             <div className="uppercase">filter</div>
           </div>
@@ -37,48 +38,24 @@ const Shop = () => {
                 <option value="">price high-low</option>
               </select>
             </div>
-            <div className="border border-black p-1 text-xl">
-              <FiGrid />
+            <div
+              className="border border-black p-1 text-xl cursor-pointer"
+              onClick={gridViewToggle}
+            >
+              {gridView ? <FiGrid /> : <FiList />}
             </div>
           </div>
         </div>
         {/* end utility */}
         <div className="grid grid-cols-3 gap-10 mt-5">
           {/* filter menu */}
-          <div className="hidden lg:block px-10">
+          <div className="hidden lg:block px-10 select-none">
             <SectionFilter />
           </div>
           {/* end filter menu */}
           <div className="col-span-3 lg:col-span-2">
             {/* list products */}
-            <div className="grid grid-cols-2 gap-5 xl:grid-cols-3">
-              {products.map((product) => {
-                const { id, name, images, price } = product;
-                return (
-                  <div className="" key={id}>
-                    <div className="bg-white border h-72 p-5">
-                      <img
-                        src={images[0]}
-                        alt={name}
-                        className="h-full w-full object-contain"
-                      />
-                    </div>
-                    <div className="mt-2 text-xs md:text-base">{name}</div>
-                    <div className="mt-2 flex justify-between items-center">
-                      <div className="font-semibold md:text-lg">$ {price}</div>
-                      <div className="flex gap-x-2 text-xs">
-                        <div className="border border-black rounded px-2 py-1">
-                          <FiEye />
-                        </div>
-                        <div className="border border-black rounded px-2 py-1">
-                          <FiShoppingCart />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            {gridView ? <GridView /> : <ListView />}
             {/* end list products */}
           </div>
         </div>

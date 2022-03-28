@@ -4,6 +4,7 @@ import reducer from "../reducers/app_reducer";
 const initialState = {
   isSidebarOpen: false,
   isFilterbarOpen: false,
+  gridView: true,
 };
 
 const AppContext = React.createContext();
@@ -19,8 +20,14 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: "FILTERBAR_TOGGLE" });
   };
 
+  const gridViewToggle = () => {
+    dispatch({ type: "GRIDVIEW_TOGGLE" });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, sidebarToggle, filterbarToggle }}>
+    <AppContext.Provider
+      value={{ ...state, sidebarToggle, filterbarToggle, gridViewToggle }}
+    >
       {children}
     </AppContext.Provider>
   );
