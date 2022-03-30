@@ -1,8 +1,7 @@
 import React from "react";
 import { FiShoppingCart, FiEye } from "react-icons/fi";
-import { products } from "../utils/constants";
 
-const GridView = () => {
+const GridView = ({ products }) => {
   return (
     <div className="grid grid-cols-2 gap-5 xl:grid-cols-3">
       {products.map((product) => {

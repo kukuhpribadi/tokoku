@@ -1,8 +1,7 @@
 import React from "react";
 import { FiShoppingCart, FiEye } from "react-icons/fi";
-import { products } from "../utils/constants";
 
-const ListView = () => {
+const ListView = ({ products }) => {
   return (
     <div className="">
       {products.map((product) => {

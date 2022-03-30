@@ -7,7 +7,14 @@ import GridView from "../components/GridView";
 import ListView from "../components/ListView";
 
 const Shop = () => {
-  const { gridView, filterbarToggle, gridViewToggle } = useAppContext();
+  const {
+    gridView,
+    filterbarToggle,
+    gridViewToggle,
+    filtered_products: products,
+    sort,
+    updateSort,
+  } = useAppContext();
   return (
     <div>
       <Hero url="https://images.unsplash.com/photo-1595309849731-f7ce86eda9fc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1583&q=80" />
@@ -28,14 +35,17 @@ const Shop = () => {
             <div>sort by</div>
             <div>
               <select
-                name=""
-                id=""
+                name="sort"
+                id="sort"
+                value={sort}
+                onChange={updateSort}
                 className="border border-black p-1 rounded outline-none"
               >
-                <option value="">name a-z</option>
-                <option value="">name z-a</option>
-                <option value="">price low-high</option>
-                <option value="">price high-low</option>
+                <option value="default">default</option>
+                <option value="name-a">name a-z</option>
+                <option value="name-z">name z-a</option>
+                <option value="price-low">price low-high</option>
+                <option value="price-high">price high-low</option>
               </select>
             </div>
             <div
@@ -55,7 +65,11 @@ const Shop = () => {
           {/* end filter menu */}
           <div className="col-span-3 lg:col-span-2">
             {/* list products */}
-            {gridView ? <GridView /> : <ListView />}
+            {gridView ? (
+              <GridView products={products} />
+            ) : (
+              <ListView products={products} />
+            )}
             {/* end list products */}
           </div>
         </div>
